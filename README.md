@@ -1,7 +1,9 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
 > This project is The Ruby on Rails inventory tracking web application for a logistics company
-![screenshot](./app/assets/images/InventoryTracking.png)
+> this project is a take-home assignement from [Fall 2022 - Shopify Developer Intern Challenge Question](https://docs.google.com/document/d/1DuHN-nPWvZJdMxrOVvHbu3OomMvRrCfCnrFXqgqG56Q/edit#)
+
+![screenshot](./app/assets/images/inventory-erd.png)
 
 This Ruby on Rails application allows the user to do Basic CRUD Functionality:
 - Create inventory items
