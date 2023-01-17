@@ -1,17 +1,27 @@
-<div id="<%= dom_id item %>">
+<div id="<%= item[:id] %>">
   <p>
     <strong>Name:</strong>
-    <%= item.name %>
+    <%= item[:name] %>
   </p>
 
   <p>
     <strong>Description:</strong>
-    <%= item.description %>
+    <%= item[:description] %>
   </p>
 
   <p>
     <strong>Price:</strong>
-    <%= item.price %>
+    <%= item[:price] %>
   </p>
-
+    
+    <%  item[:loc_name].each do |location| %>
+        <p>
+            <strong>Location:</strong>
+            <%= location[:name] %>
+        </p>
+        <p>
+            <strong>Quantity:</strong>
+            <%= location[:quantity] %>
+        </p>
+    <% end %>
 </div>

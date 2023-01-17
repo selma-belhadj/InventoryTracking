@@ -27,6 +27,16 @@
   </div>
 
   <div>
+    <%= form.label :location_id, style: "display: block" %>
+    <%= form.collection_select :location_id, Location.all, :id, :name %>
+  </div>
+
+  <div>
+    <%= form.label :quantity, style: "display: block" %>
+    <%= form.text_field :quantity %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>

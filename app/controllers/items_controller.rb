@@ -3,7 +3,26 @@ class ItemsController < ApplicationController
 
   # GET /items 
   def index
-    @items = Item.all
+    @items = []
+    aitems = Item.all
+    aitems.each do |item| 
+      location = ItemLocation.where(item_id: item.id)
+      locations = []
+      location.each do |loc|
+        locations.push({
+          name: Location.find_by(id: loc.location_id).name,
+          quantity: loc.quantity
+        })
+      end
+      @items.push({
+        id: item.id,
+        name: item.name,
+        description: item.description,
+        price: item.price,
+        loc_name: locations
+      })
+    end
+    @items
   end
 
   # GET /items/1
@@ -17,15 +36,25 @@ class ItemsController < ApplicationController
 
   # GET /items/1/edit
   def edit
+     @item = Item.find(params[:id])
   end
 
   # POST /items 
   def create
-    @item = Item.new(item_params)
+    @item = Item.new(
+      name: item_params[:name],
+      description: item_params[:description],
+      price: item_params[:price]
+    )
 
     respond_to do |format|
       if @item.save
-        format.html { redirect_to item_url(@item), notice: "Item was successfully created." }
+      item_location = ItemLocation.new(item_id: @item.id, location_id: item_params[:location_id], quantity: item_params[:quantity])
+        if item_location.save
+          format.html { redirect_to item_url(@item), notice: "Item was successfully created." }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+        end
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -34,9 +63,17 @@ class ItemsController < ApplicationController
 
   # PATCH/PUT /items/1
   def update
+    
+
     respond_to do |format|
-      if @item.update(item_params)
-        format.html { redirect_to item_url(@item), notice: "Item was successfully updated." }
+      if @item.update(
+        name: item_params[:name],
+        description: item_params[:description],
+        price: item_params[:price],
+        location_id: item_params[:location_id],
+        quantity: item_params[:quantity]
+        )
+           format.html { redirect_to item_url(@item), notice: "Item was successfully created." }
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
@@ -55,11 +92,29 @@ class ItemsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_item
-      @item = Item.find(params[:id])
+      item = Item.find(params[:id])
+      location = ItemLocation.where(item_id: item.id)
+      locations = []
+      location.each do |loc|
+        locations.push({
+          name: Location.find_by(id: loc.location_id).name,
+          quantity: loc.quantity
+        })
+      end
+      @item = {
+        id: item.id,
+        name: item.name,
+        description: item.description,
+        price: item.price,
+        loc_name: locations
+      }
+      @item
     end
 
     # Only allow a list of trusted parameters through.
     def item_params
-      params.require(:item).permit(:name, :description, :price)
+      params.require(:item).permit(:name, :description, :price, :location_id, :quantity)
     end
+
+
 end
