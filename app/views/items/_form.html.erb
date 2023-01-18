@@ -1,6 +1,6 @@
-<%= form_with(model: item) do |form| %>
+<%= form_with(model: item, html: { class: "form-group" }) do |form| %>
   <% if item.errors.any? %>
-    <div style="color: red">
+    <div class="alert alert-danger">
       <h2><%= pluralize(item.errors.count, "error") %> prohibited this item from being saved:</h2>
 
       <ul>
@@ -11,32 +11,32 @@
     </div>
   <% end %>
 
-  <div>
+  <div class="form-group">
     <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, class: "form-control" %>
   </div>
 
-  <div>
+  <div class="form-group">
     <%= form.label :description, style: "display: block" %>
-    <%= form.text_area :description %>
+    <%= form.text_area :description, class: "form-control" %>
   </div>
 
-  <div>
+  <div class="form-group">
     <%= form.label :price, style: "display: block" %>
-    <%= form.text_field :price %>
+    <%= form.text_field :price, class: "form-control" %>
   </div>
 
-  <div>
+  <div class="form-group">
     <%= form.label :location_id, style: "display: block" %>
-    <%= form.collection_select :location_id, Location.all, :id, :name %>
+    <%= form.collection_select :location_id, Location.all, :id, :name, {}, class: "form-control" %>
   </div>
 
-  <div>
+  <div class="form-group">
     <%= form.label :quantity, style: "display: block" %>
-    <%= form.text_field :quantity %>
+    <%= form.text_field :quantity, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="form-group">
+    <%= form.submit "Save", class: "btn btn-primary" %>
   </div>
 <% end %>
