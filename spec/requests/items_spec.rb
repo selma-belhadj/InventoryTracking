@@ -17,13 +17,25 @@ RSpec.describe "/items", type: :request do
   # This should return the minimal set of attributes required to create a valid
   # Item. As you add validations to Item, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
+  # location = Location.create(name: "Test", address: "123 Test St", city: "Testville")
+
+  let(:valid_attributes) do
+    {
+      name: "Eggs",
+      price: 1,
+      description: "Eggs are good for you",
+
+    }
+  end
+
+  let(:invalid_attributes) do
+    {
+      name: "",
+      price: 0,
+      description: ""
+    }
+  end
 
   describe "GET /index" do
     it "renders a successful response" do
@@ -88,15 +100,19 @@ RSpec.describe "/items", type: :request do
 
   describe "PATCH /update" do
     context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+      let(:new_attributes) do 
+        {
+          name: "Milk",
+          price: 1,
+          description: "Milk is good for you"
+        }
+      end
 
       it "updates the requested item" do
         item = Item.create! valid_attributes
         patch item_url(item), params: { item: new_attributes }
         item.reload
-        skip("Add assertions for updated state")
+        expect(item.name).to include("Milk")
       end
 
       it "redirects to the item" do

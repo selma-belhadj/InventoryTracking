@@ -17,14 +17,19 @@ RSpec.describe "/locations", type: :request do
   # This should return the minimal set of attributes required to create a valid
   # Location. As you add validations to Location, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+  let(:valid_attributes) do {
+    name: "name",
+    address: "address",
+    city: "city"
   }
+  end
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+  let(:invalid_attributes) do {
+    name: "na",
+    address: "ad",
+    city: "city"
   }
-
+  end
   describe "GET /index" do
     it "renders a successful response" do
       Location.create! valid_attributes
@@ -88,15 +93,17 @@ RSpec.describe "/locations", type: :request do
 
   describe "PATCH /update" do
     context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+      let(:new_attributes) do {
+        name: "Grapes",
+        address: "Algeria",
+        city: "Medea"
       }
-
+      end
       it "updates the requested location" do
         location = Location.create! valid_attributes
         patch location_url(location), params: { location: new_attributes }
         location.reload
-        skip("Add assertions for updated state")
+        expect(location.name).to include("Grapes")
       end
 
       it "redirects to the location" do
