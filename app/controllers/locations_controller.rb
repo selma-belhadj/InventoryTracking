@@ -1,5 +1,5 @@
 class LocationsController < ApplicationController
-  before_action :set_location, only: %i[ show edit update destroy ]
+  before_action :set_location, only: %i[show edit update destroy]
 
   # GET /locations
   def index
@@ -7,8 +7,7 @@ class LocationsController < ApplicationController
   end
 
   # GET /locations/1
-  def show
-  end
+  def show; end
 
   # GET /locations/new
   def new
@@ -16,8 +15,7 @@ class LocationsController < ApplicationController
   end
 
   # GET /locations/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /locations
   def create
@@ -25,7 +23,7 @@ class LocationsController < ApplicationController
 
     respond_to do |format|
       if @location.save
-        format.html { redirect_to location_url(@location), notice: "Location was successfully created." }
+        format.html { redirect_to location_url(@location), notice: 'Location was successfully created.' }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -36,7 +34,7 @@ class LocationsController < ApplicationController
   def update
     respond_to do |format|
       if @location.update(location_params)
-        format.html { redirect_to location_url(@location), notice: "Location was successfully updated." }
+        format.html { redirect_to location_url(@location), notice: 'Location was successfully updated.' }
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
@@ -48,18 +46,19 @@ class LocationsController < ApplicationController
     @location.destroy
 
     respond_to do |format|
-      format.html { redirect_to locations_url, notice: "Location was successfully destroyed." }
+      format.html { redirect_to locations_url, notice: 'Location was successfully destroyed.' }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_location
-      @location = Location.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def location_params
-      params.require(:location).permit(:name, :address, :city)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_location
+    @location = Location.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def location_params
+    params.require(:location).permit(:name, :address, :city)
+  end
 end

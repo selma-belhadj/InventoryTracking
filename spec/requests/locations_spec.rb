@@ -12,101 +12,101 @@ require 'rails_helper'
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe "/locations", type: :request do
-  
+RSpec.describe '/locations', type: :request do
   # This should return the minimal set of attributes required to create a valid
   # Location. As you add validations to Location, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) do {
-    name: "name",
-    address: "address",
-    city: "city"
-  }
+  let(:valid_attributes) do
+    {
+      name: 'name',
+      address: 'address',
+      city: 'city'
+    }
   end
 
-  let(:invalid_attributes) do {
-    name: "na",
-    address: "ad",
-    city: "city"
-  }
+  let(:invalid_attributes) do
+    {
+      name: 'na',
+      address: 'ad',
+      city: 'city'
+    }
   end
-  describe "GET /index" do
-    it "renders a successful response" do
+  describe 'GET /index' do
+    it 'renders a successful response' do
       Location.create! valid_attributes
       get locations_url
       expect(response).to be_successful
     end
   end
 
-  describe "GET /show" do
-    it "renders a successful response" do
+  describe 'GET /show' do
+    it 'renders a successful response' do
       location = Location.create! valid_attributes
       get location_url(location)
       expect(response).to be_successful
     end
   end
 
-  describe "GET /new" do
-    it "renders a successful response" do
+  describe 'GET /new' do
+    it 'renders a successful response' do
       get new_location_url
       expect(response).to be_successful
     end
   end
 
-  describe "GET /edit" do
-    it "renders a successful response" do
+  describe 'GET /edit' do
+    it 'renders a successful response' do
       location = Location.create! valid_attributes
       get edit_location_url(location)
       expect(response).to be_successful
     end
   end
 
-  describe "POST /create" do
-    context "with valid parameters" do
-      it "creates a new Location" do
-        expect {
+  describe 'POST /create' do
+    context 'with valid parameters' do
+      it 'creates a new Location' do
+        expect do
           post locations_url, params: { location: valid_attributes }
-        }.to change(Location, :count).by(1)
+        end.to change(Location, :count).by(1)
       end
 
-      it "redirects to the created location" do
+      it 'redirects to the created location' do
         post locations_url, params: { location: valid_attributes }
         expect(response).to redirect_to(location_url(Location.last))
       end
     end
 
-    context "with invalid parameters" do
-      it "does not create a new Location" do
-        expect {
+    context 'with invalid parameters' do
+      it 'does not create a new Location' do
+        expect do
           post locations_url, params: { location: invalid_attributes }
-        }.to change(Location, :count).by(0)
+        end.to change(Location, :count).by(0)
       end
 
-    
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
         post locations_url, params: { location: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
-    
     end
   end
 
-  describe "PATCH /update" do
-    context "with valid parameters" do
-      let(:new_attributes) do {
-        name: "Grapes",
-        address: "Algeria",
-        city: "Medea"
-      }
+  describe 'PATCH /update' do
+    context 'with valid parameters' do
+      let(:new_attributes) do
+        {
+          name: 'Grapes',
+          address: 'Algeria',
+          city: 'Medea'
+        }
       end
-      it "updates the requested location" do
+      it 'updates the requested location' do
         location = Location.create! valid_attributes
         patch location_url(location), params: { location: new_attributes }
         location.reload
-        expect(location.name).to include("Grapes")
+        expect(location.name).to include('Grapes')
       end
 
-      it "redirects to the location" do
+      it 'redirects to the location' do
         location = Location.create! valid_attributes
         patch location_url(location), params: { location: new_attributes }
         location.reload
@@ -114,26 +114,24 @@ RSpec.describe "/locations", type: :request do
       end
     end
 
-    context "with invalid parameters" do
-    
+    context 'with invalid parameters' do
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
         location = Location.create! valid_attributes
         patch location_url(location), params: { location: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
-    
     end
   end
 
-  describe "DELETE /destroy" do
-    it "destroys the requested location" do
+  describe 'DELETE /destroy' do
+    it 'destroys the requested location' do
       location = Location.create! valid_attributes
-      expect {
+      expect do
         delete location_url(location)
-      }.to change(Location, :count).by(-1)
+      end.to change(Location, :count).by(-1)
     end
 
-    it "redirects to the locations list" do
+    it 'redirects to the locations list' do
       location = Location.create! valid_attributes
       delete location_url(location)
       expect(response).to redirect_to(locations_url)
