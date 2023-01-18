@@ -1,23 +1,26 @@
-<div id="<%= item[:id] %>">
-  <p>
-    <strong>Name:</strong>
-    <%= item[:name] %>
-  </p>
+<div id="<%= item[:id] %>" class="card">
+  <div class="card-body">
+    <p class="card-text">
+      <strong>Name:</strong>
+      <%= item[:name] %>
+    </p>
 
-  <p>
-    <strong>Description:</strong>
-    <%= item[:description] %>
-  </p>
+    <p class="card-text">
+      <strong>Description:</strong>
+      <%= item[:description] %>
+    </p>
 
-  <p>
-    <strong>Price:</strong>
-    <%= item[:price] %>
-  </p>
-
-    <strong>Quantity in each location:</strong>
+    <p class="card-text">
+      <strong>Price:</strong>
+      <%= item[:price] %>
+    </p>
+    <p class="card-text">
+      <strong>Quantity in each location:</strong>
+    </p>
     <%  item[:loc_name].each do |location| %>
-        <p>
+        <p class="card-text">
             <%= location[:name] %> <span>:</span>  <%= location[:quantity] %>
         </p>
     <% end %>
+  </div>
 </div>

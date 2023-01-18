@@ -1,14 +1,22 @@
-<p style="color: green"><%= notice %></p>
+<p class="alert alert-success" role="alert"><%= notice %></p>
 
-<h1>Locations</h1>
-
-<div id="locations">
-  <% @locations.each do |location| %>
-    <%= render location %>
-    <p>
-      <%= link_to "Show this location", location %>
-    </p>
-  <% end %>
+<div class="text-center">
+  <h1>Locations</h1>
 </div>
 
-<%= link_to "New location", new_location_path %>
+<div class="container" id="locations">
+  <div class="row">
+    <% @locations.each do |location| %>
+      <div class="col-md-4">
+        <%= render location %>
+        <p class="text-center">
+          <%= link_to "Show this location", location, class: "btn btn-primary" %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="text-center">
+  <%= link_to "New location", new_location_path, class: "btn btn-success" %>
+</div>

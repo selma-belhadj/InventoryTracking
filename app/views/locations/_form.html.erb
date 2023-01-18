@@ -1,32 +1,32 @@
-<%= form_with(model: location) do |form| %>
+<%= form_with(model: location, class: "form-group") do |form| %>
   <% if location.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(location.errors.count, "error") %> prohibited this location from being saved:</h2>
+    <div class="alert alert-danger" role="alert">
+      <h2 class="text-center"><%= pluralize(location.errors.count, "error") %> prohibited this location from being saved:</h2>
 
       <ul>
         <% location.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+          <li class="text-center"><%= error.full_message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :address, style: "display: block" %>
-    <%= form.text_field :address %>
+  <div class="form-group">
+    <%= form.label :address %>
+    <%= form.text_field :address, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :city, style: "display: block" %>
-    <%= form.text_field :city %>
+  <div class="form-group">
+    <%= form.label :city %>
+    <%= form.text_field :city, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="text-center">
+    <%= form.submit 'Save location', class: "btn btn-primary" %>
   </div>
 <% end %>

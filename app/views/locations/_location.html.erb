@@ -1,17 +1,13 @@
-<div id="<%= dom_id location %>">
-  <p>
-    <strong>Name:</strong>
-    <%= location.name %>
-  </p>
-
-  <p>
-    <strong>Address:</strong>
-    <%= location.address %>
-  </p>
-
-  <p>
-    <strong>City:</strong>
-    <%= location.city %>
-  </p>
-
+<div class="card" id="<%= dom_id location %>">
+  <div class="card-body">
+    <p class="card-text">
+      <strong>Name:</strong> <%= location.name %>
+    </p>
+    <p class="card-text">
+      <strong>Address:</strong> <%= location.address %>
+    </p>
+    <p class="card-text">
+      <strong>City:</strong> <%= location.city %>
+    </p>
+  </div>
 </div>

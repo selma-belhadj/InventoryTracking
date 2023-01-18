@@ -1,9 +1,11 @@
-<h1>New location</h1>
+<div class="text-center">
+  <h1>New location</h1>
+</div>
 
 <%= render "form", location: @location %>
 
 <br>
 
-<div>
-  <%= link_to "Back to locations", locations_path %>
+<div class="text-center">
+  <%= link_to "Back to locations", locations_path, class: "btn btn-secondary" %>
 </div>

@@ -1,10 +1,12 @@
-<h1>Editing location</h1>
+<div class="text-center">
+  <h1>Editing location</h1>
+</div>
 
 <%= render "form", location: @location %>
 
 <br>
 
-<div>
-  <%= link_to "Show this location", @location %> |
-  <%= link_to "Back to locations", locations_path %>
+<div class="text-center">
+  <%= link_to "Show this location", @location, class: "btn btn-primary" %>
+  <%= link_to "Back to locations", locations_path, class: "btn btn-secondary" %>
 </div>
