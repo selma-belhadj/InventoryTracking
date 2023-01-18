@@ -3,28 +3,19 @@ class ItemsController < ApplicationController
 
   # GET /items
   def index
-    @items = []
-    aitems = Item.all
-    aitems.each do |item|
-      location = ItemLocation.where(item_id: item.id)
-      locations = []
-      location.each do |loc|
-        locations.push({
-                         name: Location.find_by(id: loc.location_id).name,
-                         quantity: loc.quantity
-                       })
-      end
-      @items.push({
-                    id: item.id,
-                    name: item.name,
-                    description: item.description,
-                    price: item.price,
-                    loc_name: locations
-                  })
+    @items = Item.includes(:locations, :item_locations).map do |item|
+      {
+        id: item.id,
+        name: item.name,
+        description: item.description,
+        price: item.price,
+        loc_name: item.locations.map do |location|
+          { name: location.name, quantity: item.item_locations.find_by(location_id: location.id).quantity }
+        end
+      }
     end
-    @items
   end
-
+  
   # GET /items/1
   def show; end
 
@@ -40,43 +31,25 @@ class ItemsController < ApplicationController
 
   # POST /items
   def create
-    @item = Item.new(
-      name: item_params[:name],
-      description: item_params[:description],
-      price: item_params[:price]
-    )
-
-    respond_to do |format|
-      if @item.save
-        item_location = ItemLocation.new(item_id: @item.id, location_id: item_params[:location_id],
-                                         quantity: item_params[:quantity])
-        if item_location.save
-          format.html { redirect_to item_url(@item), notice: 'Item was successfully created.' }
-        else
-          format.html { render :new, status: :unprocessable_entity }
-        end
-      else
-        format.html { render :new, status: :unprocessable_entity }
-      end
+    @item = Item.new(item_params.except(:location_id, :quantity))
+  
+    if @item.save
+      @item.item_locations.create(location_id: item_params[:location_id], quantity: item_params[:quantity])
+      redirect_to item_url(@item), notice: 'Item was successfully created.'
+    else
+      render :new, status: :unprocessable_entity
     end
   end
-
+  
   # PATCH/PUT /items/1
   def update
-    respond_to do |format|
-      if @item.update(
-        name: item_params[:name],
-        description: item_params[:description],
-        price: item_params[:price],
-        location_id: item_params[:location_id],
-        quantity: item_params[:quantity]
-      )
-        format.html { redirect_to item_url(@item), notice: 'Item was successfully created.' }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-      end
+    if @item.update(item_params)
+      redirect_to item_url(@item), notice: 'Item was successfully updated.'
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
+  
 
   # DELETE /items/1
   def destroy
