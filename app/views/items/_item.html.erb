@@ -13,15 +13,11 @@
     <strong>Price:</strong>
     <%= item[:price] %>
   </p>
-    
+
+    <strong>Quantity in each location:</strong>
     <%  item[:loc_name].each do |location| %>
         <p>
-            <strong>Location:</strong>
-            <%= location[:name] %>
-        </p>
-        <p>
-            <strong>Quantity:</strong>
-            <%= location[:quantity] %>
+            <%= location[:name] %> <span>:</span>  <%= location[:quantity] %>
         </p>
     <% end %>
 </div>
