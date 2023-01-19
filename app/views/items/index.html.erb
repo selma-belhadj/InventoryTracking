@@ -4,9 +4,9 @@
 
 <div id="items" class="row">
   <% @items.each do |item| %>
-    <%= render 'item', item: item %>
+    <%= render item %>
     <p class="text-center">
-      <%= link_to "Show this item", item_path(item[:id]), class: "btn btn-primary" %>
+      <%= link_to "Show this item", item, class: "btn btn-primary" %>
     </p>
   <% end %>
 </div>
