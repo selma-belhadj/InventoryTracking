@@ -5,7 +5,7 @@ class ItemsController < ApplicationController
   def index
     @items = Item.all
   end
-  
+
   # GET /items/1
   def show; end
 
@@ -22,7 +22,7 @@ class ItemsController < ApplicationController
   # POST /items
   def create
     @item = Item.new(item_params)
-  
+
     respond_to do |format|
       if @item.save
         format.html { redirect_to item_url(@item), notice: 'Item was successfully created.' }
@@ -31,7 +31,7 @@ class ItemsController < ApplicationController
       end
     end
   end
-  
+
   # PATCH/PUT /items/1
   def update
     respond_to do |format|
@@ -41,9 +41,7 @@ class ItemsController < ApplicationController
         format.html { render :new, status: :unprocessable_entity }
       end
     end
- 
   end
-  
 
   # DELETE /items/1
   def destroy
@@ -63,8 +61,6 @@ class ItemsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def item_params
-    # params.require(:item).permit(:name, :description, :price, :location_id, :quantity)
     params.require(:item).permit(:name, :description, :price)
-
   end
 end
