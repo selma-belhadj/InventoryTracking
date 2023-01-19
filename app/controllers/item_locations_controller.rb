@@ -14,23 +14,22 @@ class ItemLocationsController < ApplicationController
   def edit; end
 
   def create
-    @item_location = ItemLocation.find_or_create_by(location: item_locations_params[:location], item: item_locations_params[:item])
+    @item_location = ItemLocation.find_or_create_by(location: item_locations_params[:location],
+                                                    item: item_locations_params[:item])
     if @item_location.persisted?
       @item_location.update(item_locations_params)
     else
       @item_location.assign_attributes(item_locations_params)
     end
-  
-  respond_to do |format|
-    if !@item_location.persisted? && @item_location.save
-      format.html { redirect_to item_location_url(@item_location), notice: 'Item Location was successfully created.' }
-    else
-      format.html { render :new, status: :unprocessable_entity }
+
+    respond_to do |format|
+      if !@item_location.persisted? && @item_location.save
+        format.html { redirect_to item_location_url(@item_location), notice: 'Item Location was successfully created.' }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+      end
     end
   end
-  
-  end
-
 
   def update
     respond_to do |format|
@@ -42,14 +41,14 @@ class ItemLocationsController < ApplicationController
     end
   end
 
-    # DELETE /items/1
-    def destroy
-      @item_location.destroy
-  
-      respond_to do |format|
-        format.html { redirect_to item_locations_path, notice: 'Item Location was successfully destroyed.' }
-      end
+  # DELETE /items/1
+  def destroy
+    @item_location.destroy
+
+    respond_to do |format|
+      format.html { redirect_to item_locations_path, notice: 'Item Location was successfully destroyed.' }
     end
+  end
 
   private
 
