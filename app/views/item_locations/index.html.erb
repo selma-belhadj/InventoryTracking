@@ -1,0 +1,36 @@
+<p class="alert alert-success"><%= notice %></p>
+
+<h1 class="text-center">Items</h1>
+
+<div id="items_locations" class="row">
+ <% @item_locations.group_by(&:item_id).each do |item_id, item_locations| %>
+  <h2 class="mb-3"><%= Item.find(item_id).name %></h2>
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th class="text-center">Location Name</th>
+        <th class="text-center">Quantity</th>
+        <th class="text-center">Update</th>
+        <th class="text-center">Destroy</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% item_locations.each do |item_location| %>
+        <tr>
+          <td class="text-center"><%= item_location.location.name %></td>
+          <td class="text-center"><%= item_location.quantity %></td>
+          <td class="text-center"><%= link_to "Show this item location", item_location, class: "btn btn-primary" %></td>
+          <td class="text-center"><%= button_to "Destroy this item", item_location, method: :delete, class: "btn btn-danger", data: { method: :delete, remote: true } %></td>
+  
+
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+
+
+</div>
+
+<%= link_to "New item_location", new_item_location_path, class: "btn btn-primary" %>

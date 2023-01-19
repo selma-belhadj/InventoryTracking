@@ -1,0 +1,37 @@
+<div class="card mb-4" id="<%= dom_id item_location %>" >
+  <div class="card-header">
+    <h3 class="card-title">
+      <%= link_to item_location.item.name, item_location %>
+    </h3>
+  </div>
+<div class="card-body">
+    <p class="card-text">
+      <strong class="text-secondary">Item Name</strong>
+      <%= item_location.item.name %>
+    </p>
+    <p class="card-text">
+      <strong class="text-secondary">Item Description</strong>
+      <%= item_location.item.description %>
+    </p>
+    <p class="card-text">
+      <strong class="text-secondary">Item Price</strong>
+      <%= item_location.item.price %>
+    </p>
+    <p class="card-text">
+      <strong class="text-secondary">Location Name</strong>
+      <%= item_location.location.name %>
+    </p>
+    <p class="card-text">
+      <strong class="text-secondary">Location City</strong>
+      <%= item_location.location.city %>
+    </p>
+     <p class="card-text">
+      <strong class="text-secondary">Location Address</strong>
+      <%= item_location.location.address %>
+    </p>
+    <p class="card-text">
+      <strong class="text-secondary">Quantity</strong>
+      <%= item_location.quantity %>
+    </p>
+  </div>
+</div>

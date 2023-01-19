@@ -1,0 +1,10 @@
+<h1 class="text-center">Editing item</h1>
+
+<%= render "form", item_location: @item_location, class: "form-control" %>
+
+<br>
+
+<div class="text-center">
+  <%= link_to "Show this item", @item_location, class: "btn btn-primary" %> |
+  <%= link_to "Back to items", item_locations_path, class: "btn btn-primary" %>
+</div>

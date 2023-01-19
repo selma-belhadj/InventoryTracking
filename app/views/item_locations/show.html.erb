@@ -1,0 +1,7 @@
+<p class="alert alert-success"><%= notice %></p>
+<%= render @item_location %>
+<div class="text-center">
+  <%= link_to "Edit this item", edit_item_location_path(@item_location), class: "btn btn-primary" %> |
+  <%= link_to "Back to items", item_locations_path, class: "btn btn-secondary" %>
+  <%= button_to "Destroy this item", @item_location, method: :delete, class: "btn btn-danger", data: { method: :delete, remote: true } %>
+</div>
