@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  # get 'item_locations/index'
-  # get 'item_locations/new'
-  # get 'item_locations/show'
-  # get 'item_locations/edit'
   root 'pages#home'
   get 'about', to: 'pages#about'
   resources :locations
